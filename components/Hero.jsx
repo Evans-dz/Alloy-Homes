@@ -1,22 +1,17 @@
 import { site } from "../data/site";
 
-// Full-bleed hero. Uses a background video when present, with a poster
-// image fallback, and a basalt gradient underneath so the headline stays
-// readable even if neither asset has been uploaded yet.
+// Full-bleed hero. Uses a still image of a finished Alloy home, with a
+// basalt gradient scrim over it so the headline stays readable.
 export default function Hero() {
   return (
     <section className="hero" id="top">
       <div className="hero__media" aria-hidden="true">
-        <video
+        <img
           className="hero__video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/images/hero/hero-poster.jpg"
-        >
-          <source src="/images/hero/hero.mp4" type="video/mp4" />
-        </video>
+          src="/images/hero/hero.jpg"
+          alt=""
+          fetchPriority="high"
+        />
         <div className="hero__scrim" />
       </div>
 
