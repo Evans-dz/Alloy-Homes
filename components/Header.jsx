@@ -1,7 +1,7 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { site } from "../data/site";
+import { AlloyLogo } from "./AlloyLogo";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,14 +28,8 @@ export default function Header() {
     <header className={`header ${scrolled ? "header--solid" : ""} ${open ? "header--open" : ""}`}>
       <div className="header__inner">
         <a href="#top" className="wordmark" onClick={close} aria-label="Alloy Homes — home">
-          <span className="wordmark__mark" aria-hidden="true">
-            A
-          </span>
-          <span className="wordmark__text">
-            ALLOY <span className="wordmark__thin">HOMES</span>
-          </span>
+          <AlloyLogo className="wordmark__logo" />
         </a>
-
         <nav className="header__nav" aria-label="Primary">
           {site.nav.map((item) => (
             <a key={item.href} href={item.href} className="header__link">
@@ -43,7 +37,6 @@ export default function Header() {
             </a>
           ))}
         </nav>
-
         <div className="header__actions">
           <a href={site.phoneHref} className="header__phone">
             {site.phone}
@@ -52,7 +45,6 @@ export default function Header() {
             Start your build
           </a>
         </div>
-
         <button
           className="header__burger"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -64,7 +56,6 @@ export default function Header() {
           <span />
         </button>
       </div>
-
       <div className={`mobile-menu ${open ? "mobile-menu--open" : ""}`}>
         <nav className="mobile-menu__nav" aria-label="Mobile">
           {site.nav.map((item) => (
