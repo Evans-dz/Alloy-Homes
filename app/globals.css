@@ -245,7 +245,7 @@ textarea {
 .btn--ghost {
   background: transparent;
   border-color: var(--bronze);
-  color: var(--on-light);
+  color: var(--cream);
 }
 .btn--ghost:hover {
   background: var(--bronze);
@@ -335,6 +335,15 @@ textarea {
 .wordmark__thin {
   font-weight: 400;
   color: var(--cream-dim);
+}
+.wordmark__logo {
+  height: clamp(28px, 3.4vw, 38px);
+  width: auto;
+  display: block;
+  user-select: none;
+}
+.wordmark--footer .wordmark__logo {
+  height: clamp(34px, 4.2vw, 46px);
 }
 
 /* ---------- Header ---------- */
