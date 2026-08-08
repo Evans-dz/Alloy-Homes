@@ -1,19 +1,14 @@
 import { site } from "../data/site";
+import { AlloyLogo } from "./AlloyLogo";
 
 export default function Footer() {
   const year = new Date().getFullYear();
-
   return (
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
           <a href="#top" className="wordmark wordmark--footer" aria-label="Alloy Homes — home">
-            <span className="wordmark__mark" aria-hidden="true">
-              A
-            </span>
-            <span className="wordmark__text">
-              ALLOY <span className="wordmark__thin">HOMES</span>
-            </span>
+            <AlloyLogo className="wordmark__logo" />
           </a>
           <p className="footer__tagline">{site.tagline}</p>
           <a href={site.phoneHref} className="footer__phone">
@@ -23,7 +18,6 @@ export default function Footer() {
             {site.email}
           </a>
         </div>
-
         <div className="footer__col">
           <h4 className="footer__heading">Explore</h4>
           <ul className="footer__list">
@@ -34,7 +28,6 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-
         <div className="footer__col">
           <h4 className="footer__heading">Service area</h4>
           <ul className="footer__list">
@@ -43,7 +36,6 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-
         <div className="footer__col">
           <h4 className="footer__heading">Follow</h4>
           <ul className="footer__list">
@@ -57,7 +49,6 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-
       <div className="footer__bar">
         <div className="container footer__bar-inner">
           <span>
