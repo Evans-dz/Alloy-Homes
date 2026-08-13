@@ -7,10 +7,11 @@ export default function Process() {
       <div className="container">
         <Reveal className="section__head section__head--left">
           <p className="eyebrow">The Process</p>
-          <h2 className="section__title">A calm path to your keys.</h2>
+          <h2 className="section__title">From vision to home.</h2>
           <p className="section__intro">
-            One seamless process, three clear stages. You're involved at every
-            decision, and never guessing what comes next.
+            One team. One clear process. From the first conversation through
+            move-in and beyond, we guide every step so you always know what
+            comes next.
           </p>
         </Reveal>
 

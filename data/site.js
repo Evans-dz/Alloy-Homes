@@ -6,10 +6,10 @@
 export const site = {
   name: "Alloy Homes",
   legalName: "Alloy Homes LLC",
-  tagline: "Come home to luxury.",
+  tagline: "Built around you. Built to endure.",
   // One-line positioning used in the hero + meta description.
   positioning:
-    "Custom design-build homes crafted for Southern Utah — refined, enduring, and entirely your own.",
+    "Custom design-build homes in Southern Utah — design, planning, and craftsmanship under one accountable team.",
 
   // ---- Contact ----
   phone: "(435) 770-1232",
@@ -19,14 +19,24 @@ export const site = {
   city: "St. George, Utah",
 
   // Towns you build in (shown in the footer + contact section).
+  // Grouped loosely by area: Washington County first, then Kane/Garfield.
   serviceArea: [
     "St. George",
     "Washington",
     "Hurricane",
     "Ivins",
     "Santa Clara",
-    "Washington County",
+    "Kanab",
+    "Duck Creek",
+    "Panguitch",
+    "Panguitch Lake",
   ],
+
+  // ---- Agency credit (bottom bar) ----
+  credit: {
+    label: "EZHD",
+    href: "https://ez-hd.co",
+  },
 
   // ---- Social links (replace # with real profiles, or delete) ----
   social: [
@@ -43,19 +53,19 @@ export const site = {
   ],
 };
 
-// The three brand pillars from Alloy's current messaging, refined.
+// The three brand pillars, in the owner's words.
 export const pillars = [
   {
+    title: "Design",
+    body: "Every home begins with the people who will live there. From the way you move through the home to the smallest architectural details, we create spaces that are personal, purposeful, and entirely your own.",
+  },
+  {
     title: "Innovation",
-    body: "We pursue the best available in the building industry — materials, methods, and finishes — so your home is built with what's next, not what's easy.",
+    body: "We pursue the best available in the building industry — materials, methods, and finishes — and pair them with proven craftsmanship. Your home is built with what's next, not what's easy.",
   },
   {
-    title: "Customization",
-    body: "As a true custom builder, your hand is on every detail: from exterior palette to the placement of a single outlet, and everything in between.",
-  },
-  {
-    title: "Longevity",
-    body: "Built to stand the test of time and backed by a warranty on our labor and materials. After move-in, our team stays close to your investment.",
+    title: "Commitment",
+    body: "Our commitment doesn't end at move-in. We're here for the years to come, standing behind our work and ready to help with whatever your home may need.",
   },
 ];
 
@@ -63,37 +73,17 @@ export const pillars = [
 export const process = [
   {
     step: "01",
-    title: "Pre-construction",
-    body: "From selecting a lot to a detailed review of your floor plan, you're involved in every decision. We work to fully understand what you want from your home, then guide each step to realize it.",
+    title: "Pre-Construction",
+    body: "We plan before we build. From site evaluation and design to engineering, selections, budgeting, and permitting, we bring the pieces together early so expectations are clear before construction begins.",
   },
   {
     step: "02",
     title: "Construction",
-    body: "Once we break ground, your vision starts to take shape. You'll receive timely updates and walk the home with our tradesmen, customizing as we go. Quality control at this stage is where our attention to detail shows.",
+    body: "This is where the planning becomes real. We coordinate the people, materials, schedule, and details while keeping you connected to the progress and decisions that matter along the way.",
   },
   {
     step: "03",
-    title: "Post-construction",
-    body: "The keys are yours. As you settle in, we stay available to you and your investment — because the relationship we build over your project is meant to last well beyond move-in day.",
-  },
-];
-
-// Assurances (honest, qualitative — no invented numbers).
-export const assurances = [
-  {
-    title: "Design-build, under one roof",
-    body: "Design and construction handled by one accountable team. Fewer handoffs, fewer surprises, one point of contact from first sketch to final key.",
-  },
-  {
-    title: "Warranty on labor & materials",
-    body: "We stand behind the work. Our warranty covers both the craftsmanship and the materials that go into your home.",
-  },
-  {
-    title: "Open, calm communication",
-    body: "Building a home should be exciting, not stressful. We keep you informed and involved so the process feels clear the whole way through.",
-  },
-  {
-    title: "15+ years of building",
-    body: "Justin has spent more than fifteen years in the building industry, with a constant habit of learning new ways to build better.",
+    title: "After Move-In",
+    body: "Move-in isn't the end of our relationship. We remain a resource for you and your home, standing behind our work and here whenever you need us.",
   },
 ];

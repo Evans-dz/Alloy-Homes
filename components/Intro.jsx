@@ -13,11 +13,11 @@ export default function Intro() {
             <em>stronger</em> and last <em>longer.</em>
           </h2>
           <p className="intro__body">
-            That's an alloy — and it's how we build. As a true custom
-            design-build company in Southern Utah, Alloy Homes brings the
-            planning, craftsmanship, and finish work together under one
-            accountable team. The result is a home that's unmistakably yours,
-            engineered to endure the desert and the decades.
+            That's an alloy — and it's how we build. Alloy Homes brings design,
+            planning, craftsmanship, and every detail of the building process
+            together under one accountable team. The result is a truly custom
+            home, thoughtfully built around you and engineered to endure for
+            decades.
           </p>
         </Reveal>
 

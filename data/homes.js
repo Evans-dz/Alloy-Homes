@@ -5,23 +5,18 @@
 //   cover   -> card / showcase image
 //   gallery -> photos shown on the home's detail page (/homes/<slug>)
 //
-// NOTE: sqft / beds / baths are ESTIMATES — replace with the real
-// figures from Justin. Any spec left as an empty string ("") is
-// simply hidden, so it's safe to blank one out until confirmed.
-// Locations are best-guess (Red Mountain area) — confirm the city.
+// Per the owner: no square footage, bed/bath counts, feature lists,
+// or style labels — just a photo, a short description, and a way to
+// view the home.
+// NOTE: locations are best-guess (Red Mountain area) — confirm with
+// Justin. Set `location` to "" to hide it.
 // =============================================================
 
 export const homes = [
   {
     slug: "coral-autumn",
     name: "Coral Autumn",
-    style: "Modern Desert Estate",
     location: "Ivins, UT", // confirm
-    sqft: "6,500", // estimate — confirm
-    beds: "5", // estimate — confirm
-    baths: "6", // estimate — confirm
-    garage: "Oversized", // confirm
-    featured: true,
     cover: "/images/homes/coral-autumn/cover.jpg",
     gallery: [
       "/images/homes/coral-autumn/gallery-01.jpg",
@@ -32,26 +27,13 @@ export const homes = [
       "/images/homes/coral-autumn/gallery-06.jpg",
       "/images/homes/coral-autumn/gallery-07.jpg",
     ],
-    features: [
-      "Resort pool & spa",
-      "Fire features",
-      "Sport court & putting green",
-      "Steel-beam carport",
-      "Bunk room",
-    ],
     blurb:
-      "A single-level desert estate built for gathering. Walls of glass open the great room to a resort backyard — pool, spa, fire features, and a sport court framed by red rock. Inside, a stacked-stone fireplace anchors the living space and warm walnut runs throughout.",
+      "A single-level desert estate designed for gathering. Walls of glass connect the great room to a resort-style backyard framed by red rock, creating a seamless transition between indoor and outdoor living. Inside, a stacked-stone fireplace anchors the living space, while white oak cabinetry and doors bring warmth and continuity throughout the home.",
   },
   {
     slug: "juniper",
     name: "Juniper Way",
-    style: "Desert Contemporary",
     location: "Ivins, UT", // confirm
-    sqft: "3,000", // estimate — confirm
-    beds: "4", // estimate — confirm
-    baths: "3.5", // estimate — confirm
-    garage: "3-car", // confirm
-    featured: false,
     cover: "/images/homes/juniper/cover.jpg",
     gallery: [
       "/images/homes/juniper/gallery-01.jpg",
@@ -63,15 +45,8 @@ export const homes = [
       "/images/homes/juniper/gallery-07.jpg",
       "/images/homes/juniper/gallery-08.jpg",
     ],
-    features: [
-      "Single-level living",
-      "Great-room stone fireplace",
-      "Chef's kitchen",
-      "Covered patio",
-      "Red-rock views",
-    ],
     blurb:
-      "Clean desert-contemporary lines with a warm, livable core. An open great room and chef's kitchen in walnut and stone flow out to a covered patio and turf yard, with the red cliffs as a backdrop and a spa-like owner's bath finished down to the detail.",
+      "Clean desert-contemporary architecture meets a warm, inviting interior. An open great room and chef's kitchen flow naturally to the covered patio, while expansive windows frame the surrounding red-rock views. Inside, rich walnut, natural stone, and thoughtfully detailed spaces bring warmth and character throughout the home.",
   },
 ];
 

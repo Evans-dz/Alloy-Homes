@@ -1,4 +1,5 @@
 import { Cormorant_Garamond, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -33,7 +34,7 @@ export const metadata = {
     template: "%s · Alloy Homes",
   },
   description:
-    "Alloy Homes is a custom design-build home builder in St. George and Southern Utah. Refined, enduring homes crafted around your vision — with a warranty on labor and materials.",
+    "Alloy Homes is a custom design-build home builder in St. George and Southern Utah. Design, planning, and craftsmanship under one accountable team — homes built around you and built to endure.",
   keywords: [
     "custom home builder St. George",
     "Southern Utah home builder",
@@ -44,7 +45,7 @@ export const metadata = {
   openGraph: {
     title: "Alloy Homes — Custom Home Builder in Southern Utah",
     description:
-      "Custom design-build homes crafted for Southern Utah — refined, enduring, and entirely your own.",
+      "Custom design-build homes in Southern Utah — design, planning, and craftsmanship under one accountable team.",
     url: "https://alloy-homes.com",
     siteName: site.name,
     type: "website",
@@ -67,6 +68,7 @@ export default function RootLayout({ children }) {
         <Header />
         <main>{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

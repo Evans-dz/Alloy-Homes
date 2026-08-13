@@ -27,14 +27,13 @@ can confirm details, add Justin's portrait, or add more homes later.
    `gallery-01.jpg`, `gallery-02.jpg`, … (landscape, ~1600–1800px wide,
    quality ~80 to keep them light).
 2. Add an entry to `data/homes.js` (copy an existing one) with the matching
-   slug, name, location, specs, features, blurb, cover, and gallery paths.
+   slug, name, location, blurb, cover, and gallery paths.
    The homepage showcase and the `/homes/<slug>` page build automatically.
 
 ## Confirm before going live
 
-The homes are real, but a few fields are best-guesses in `data/homes.js`:
-- **sq ft / beds / baths / garage** — currently estimates. Replace with the
-  real numbers (or blank one out — empty specs are hidden automatically).
-- **City** — both set to "Ivins, UT"; confirm the correct town.
+The homes are real, but a couple of fields are best-guesses in `data/homes.js`:
+- **City** — both set to "Ivins, UT"; confirm the correct town
+  (or set `location: ""` to hide it).
 - **Home names** — "Coral Autumn" and "Juniper Way" (from the street names).
   Change to whatever Justin calls them.

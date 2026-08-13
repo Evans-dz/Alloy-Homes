@@ -13,7 +13,7 @@ export function generateMetadata({ params }) {
   const home = getHome(params.slug);
   if (!home) return { title: "Home not found" };
   return {
-    title: `${home.name} — ${home.style}`,
+    title: home.name,
     description: home.blurb,
     openGraph: {
       title: `${home.name} · Alloy Homes`,
@@ -21,26 +21,6 @@ export function generateMetadata({ params }) {
       images: [home.cover],
     },
   };
-}
-
-function Specs({ home }) {
-  const items = [
-    [home.sqft, "sq ft"],
-    [home.beds, "beds"],
-    [home.baths, "baths"],
-    [home.garage, "garage"],
-  ].filter(([v]) => v);
-  if (!items.length) return null;
-  return (
-    <ul className="specs specs--lg" aria-label="Home specifications">
-      {items.map(([value, label]) => (
-        <li key={label}>
-          <span className="specs__num">{value}</span>
-          <span className="specs__label">{label}</span>
-        </li>
-      ))}
-    </ul>
-  );
 }
 
 export default function HomeDetail({ params }) {
@@ -56,7 +36,9 @@ export default function HomeDetail({ params }) {
           <a href="/#homes" className="detail__back">
             &larr; The Collection
           </a>
-          <p className="eyebrow eyebrow--light">{home.style} · {home.location}</p>
+          {home.location ? (
+            <p className="eyebrow eyebrow--light">{home.location}</p>
+          ) : null}
           <h1 className="detail__title">{home.name}</h1>
         </div>
       </div>
@@ -65,18 +47,6 @@ export default function HomeDetail({ params }) {
         <div className="container detail__intro">
           <Reveal className="detail__lead">
             <p>{home.blurb}</p>
-          </Reveal>
-          <Reveal className="detail__meta" delay={80}>
-            <Specs home={home} />
-            {home.features && home.features.length ? (
-              <ul className="tags">
-                {home.features.map((f) => (
-                  <li key={f} className="tag">
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
           </Reveal>
         </div>
 

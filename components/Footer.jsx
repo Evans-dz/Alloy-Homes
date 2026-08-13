@@ -55,6 +55,12 @@ export default function Footer() {
             © {year} {site.legalName}
           </span>
           <span className="footer__built">Custom homes · {site.city}</span>
+          <span className="footer__credit">
+            Designed &amp; built by{" "}
+            <a href={site.credit.href} target="_blank" rel="noreferrer">
+              {site.credit.label}
+            </a>
+          </span>
         </div>
       </div>
     </footer>

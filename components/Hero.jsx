@@ -20,9 +20,9 @@ export default function Hero() {
           Custom Home Builder · {site.city}
         </p>
         <h1 className="hero__title">
-          Come home to
+          Built around you.
           <br />
-          <em>luxury.</em>
+          <em>Built to endure.</em>
         </h1>
         <p className="hero__lead">{site.positioning}</p>
         <div className="hero__cta">

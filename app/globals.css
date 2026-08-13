@@ -17,6 +17,9 @@
   --basalt-2: #1d1813;
   --ink: #221c15;
   --bronze: #b4894e;
+  /* Deeper bronze for small text on the light stone sections — the standard
+     --bronze only reaches ~2.4:1 there, which is below the readable floor. */
+  --bronze-ink: #75521f;
   --brass: #d8b274;
   --oxblood: #6e3327;
 
@@ -41,6 +44,9 @@
   --ff-mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
 
   --container: 1200px;
+  /* Height of the fixed header bar — shared by the bar itself and the
+     gradient that grounds it, so the two can never drift apart. */
+  --header-h: clamp(78px, 9vw, 104px);
 }
 
 /* ---------- Reset / base ---------- */
@@ -137,8 +143,7 @@ textarea {
   background: var(--basalt);
   color: var(--cream);
 }
-.section--intro,
-.section--assurances {
+.section--intro {
   background: var(--stone);
 }
 .section--process,
@@ -164,21 +169,31 @@ textarea {
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.75rem;
   font-family: var(--ff-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.24em;
+  font-size: clamp(0.88rem, 1vw, 1rem);
+  font-weight: 500;
+  line-height: 1.4;
+  /* Wide tracking reads as a label, but too much hurts legibility at
+     small sizes — 0.24em was disassociating the letterforms. */
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--bronze);
+  color: var(--bronze-ink);
 }
 .eyebrow::before {
   content: "";
-  width: 1.6rem;
+  flex: none;
+  width: 1.9rem;
   height: 1px;
   background: currentColor;
 }
 .eyebrow--light {
   color: var(--brass);
+}
+/* The hero eyebrow sits directly on photography, where the scrim alone
+   isn't enough to hold it against bright areas of the image. */
+.hero__inner .eyebrow {
+  text-shadow: 0 1px 14px rgba(22, 19, 15, 0.7);
 }
 
 .section__title {
@@ -337,13 +352,15 @@ textarea {
   color: var(--cream-dim);
 }
 .wordmark__logo {
-  height: clamp(28px, 3.4vw, 38px);
+  /* The mark is a stacked lockup — the wordmark sits under the roofline —
+     so it needs real height before "ALLOY HOMES" becomes legible. */
+  height: clamp(42px, 5vw, 56px);
   width: auto;
   display: block;
   user-select: none;
 }
 .wordmark--footer .wordmark__logo {
-  height: clamp(34px, 4.2vw, 46px);
+  height: clamp(44px, 5.2vw, 60px);
 }
 
 /* ---------- Header ---------- */
@@ -353,6 +370,27 @@ textarea {
   z-index: 60;
   transition: background 0.4s ease, border-color 0.4s ease;
   border-bottom: 1px solid transparent;
+}
+/* At rest the header sits on photography. This gradient gives the logo a
+   surface to land on so it doesn't read as floating, and fades away once
+   the solid bar takes over on scroll. */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--header-h);
+  background: linear-gradient(
+    180deg,
+    rgba(22, 19, 15, 0.78) 0%,
+    rgba(22, 19, 15, 0.42) 55%,
+    rgba(22, 19, 15, 0) 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.header--solid::before,
+.header--open::before {
+  opacity: 0;
 }
 .header--solid,
 .header--open {
@@ -364,7 +402,9 @@ textarea {
   max-width: var(--container);
   margin-inline: auto;
   padding-inline: clamp(1.25rem, 5vw, 3rem);
-  height: clamp(64px, 8vw, 84px);
+  position: relative;
+  z-index: 1;
+  height: var(--header-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -505,12 +545,15 @@ textarea {
 .hero__scrim {
   position: absolute;
   inset: 0;
+  /* Ramps dark from ~40% down so every piece of hero text — eyebrow,
+     headline, lead — sits on a dark base regardless of the photo behind it. */
   background: linear-gradient(
       180deg,
       rgba(22, 19, 15, 0.5) 0%,
-      rgba(22, 19, 15, 0.15) 34%,
-      rgba(22, 19, 15, 0.55) 72%,
-      rgba(22, 19, 15, 0.9) 100%
+      rgba(22, 19, 15, 0.15) 28%,
+      rgba(22, 19, 15, 0.52) 52%,
+      rgba(22, 19, 15, 0.74) 74%,
+      rgba(22, 19, 15, 0.92) 100%
     ),
     radial-gradient(120% 80% at 80% 20%, transparent 40%, rgba(22, 19, 15, 0.4));
 }
@@ -624,8 +667,9 @@ textarea {
 }
 .pillar__index {
   font-family: var(--ff-mono);
-  font-size: 0.78rem;
-  color: var(--bronze);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--bronze-ink);
   letter-spacing: 0.1em;
 }
 .pillar__title {
@@ -730,33 +774,6 @@ textarea {
   font-size: 0.96rem;
   line-height: 1.6;
 }
-.specs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.4rem;
-  list-style: none;
-  padding-top: 0.9rem;
-  margin-top: auto;
-  border-top: 1px solid var(--hair);
-}
-.specs li {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-.specs__num {
-  font-family: var(--ff-mono);
-  font-size: 0.98rem;
-  color: var(--cream);
-}
-.specs__label {
-  font-family: var(--ff-sans);
-  font-size: 0.66rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--cream-dim);
-}
-
 .home-card--featured {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
@@ -866,37 +883,6 @@ textarea {
   background: rgba(255, 255, 255, 0.02);
 }
 
-/* ---------- Assurances ---------- */
-.assurances {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: clamp(1.6rem, 3vw, 2.6rem);
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
-}
-.assurance {
-  padding-top: 1.3rem;
-}
-.assurance__rule {
-  display: block;
-  width: 36px;
-  height: 2px;
-  background: var(--bronze);
-  margin-bottom: 1.1rem;
-}
-.assurance__title {
-  font-family: var(--ff-display);
-  font-size: 1.45rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--on-light);
-}
-.assurance__body {
-  font-family: var(--ff-sans);
-  color: var(--on-light-dim);
-  line-height: 1.65;
-  font-size: 0.98rem;
-}
-
 /* ---------- Testimonials ---------- */
 .testimonials {
   display: grid;
@@ -966,10 +952,11 @@ textarea {
 }
 .contact__detail-label {
   font-family: var(--ff-mono);
-  font-size: 0.66rem;
+  font-size: 0.8rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--bronze);
+  letter-spacing: 0.14em;
+  color: var(--bronze-ink);
 }
 .contact__detail-value {
   font-family: var(--ff-sans);
@@ -1003,7 +990,8 @@ a.contact__detail:hover .contact__detail-value {
 }
 .field__label {
   font-family: var(--ff-mono);
-  font-size: 0.66rem;
+  font-size: 0.78rem;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--on-light-dim);
@@ -1148,13 +1136,27 @@ a.contact__detail:hover .contact__detail-value {
 .footer__bar-inner {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  padding: 1.4rem 0;
+  /* padding-block only — the shorthand would zero out the inline padding
+     this element inherits from .container and push text to the screen edge. */
+  padding-block: 1.4rem;
   font-family: var(--ff-mono);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   color: var(--cream-dim);
   letter-spacing: 0.04em;
+}
+.footer__credit a {
+  color: var(--brass);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(216, 178, 116, 0.35);
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer__credit a:hover {
+  color: var(--cream);
+  border-bottom-color: var(--cream);
 }
 
 /* ---------- SmartImage placeholder ---------- */
@@ -1302,24 +1304,10 @@ a.contact__detail:hover .contact__detail-value {
 .showcase__media:hover .showcase__img {
   transform: scale(1.04);
 }
-.showcase__style {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  font-family: var(--ff-mono);
-  font-size: 0.62rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--cream);
-  background: rgba(22, 19, 15, 0.62);
-  backdrop-filter: blur(4px);
-  padding: 0.4rem 0.7rem;
-  border-radius: 2px;
-  border: 1px solid var(--hair);
-}
 .showcase__index {
   font-family: var(--ff-mono);
-  font-size: 0.72rem;
+  font-size: clamp(0.82rem, 0.9vw, 0.9rem);
+  font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--brass);
@@ -1338,47 +1326,68 @@ a.contact__detail:hover .contact__detail-value {
   color: var(--cream-dim);
   line-height: 1.7;
   font-size: 1.02rem;
-  margin-bottom: 1.3rem;
   max-width: 52ch;
 }
-.showcase__link {
-  display: inline-flex;
+/* "View this home" reveals over the photo on hover / keyboard focus. */
+.showcase__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
+  justify-content: center;
+  background: rgba(22, 19, 15, 0.55);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.showcase__overlay-label {
   font-family: var(--ff-sans);
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--brass);
-  text-decoration: none;
-  transition: gap 0.25s ease, color 0.25s ease;
-}
-.showcase__link:hover {
-  gap: 0.85rem;
+  letter-spacing: 0.02em;
   color: var(--cream);
+  border: 1px solid var(--hair-strong);
+  background: rgba(22, 19, 15, 0.35);
+  border-radius: 2px;
+  padding: 0.85em 1.6em;
+  transform: translateY(8px);
+  transition: transform 0.35s ease;
 }
-.showcase .specs {
-  margin-top: 0;
+.showcase__media:hover .showcase__overlay,
+.showcase__media:focus-visible .showcase__overlay {
+  opacity: 1;
+}
+.showcase__media:hover .showcase__overlay-label,
+.showcase__media:focus-visible .showcase__overlay-label {
+  transform: translateY(0);
 }
 
-/* ---------- Tags (feature chips) ---------- */
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  list-style: none;
-  margin-bottom: 1.3rem;
+/* Touch devices never hover — keep the cue permanently visible instead. */
+@media (hover: none) {
+  .showcase__overlay {
+    opacity: 1;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 1.1rem;
+    background: linear-gradient(
+      to top,
+      rgba(22, 19, 15, 0.8),
+      rgba(22, 19, 15, 0) 55%
+    );
+  }
+  .showcase__overlay-label {
+    transform: none;
+    padding: 0.7em 1.2em;
+    font-size: 0.82rem;
+  }
 }
-.tag {
-  font-family: var(--ff-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.05em;
-  color: var(--cream);
-  border: 1px solid var(--hair);
-  border-radius: 2px;
-  padding: 0.42rem 0.7rem;
-  background: rgba(255, 255, 255, 0.02);
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase__overlay,
+  .showcase__overlay-label {
+    transition: none;
+  }
 }
+
 
 /* ---------- Home detail page ---------- */
 .detail {
@@ -1417,7 +1426,8 @@ a.contact__detail:hover .contact__detail-value {
   padding-top: 7rem;
 }
 .detail__back {
-  display: inline-block;
+  display: block;
+  width: fit-content;
   font-family: var(--ff-mono);
   font-size: 0.74rem;
   letter-spacing: 0.08em;
@@ -1439,13 +1449,12 @@ a.contact__detail:hover .contact__detail-value {
   margin-top: 0.4rem;
 }
 .detail__intro {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: start;
   padding-bottom: clamp(2.5rem, 5vw, 4rem);
   border-bottom: 1px solid var(--hair);
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.detail__lead {
+  max-width: 62ch;
 }
 .detail__lead p {
   font-family: var(--ff-display);
@@ -1453,22 +1462,6 @@ a.contact__detail:hover .contact__detail-value {
   font-size: clamp(1.3rem, 2.4vw, 1.8rem);
   line-height: 1.4;
   color: var(--cream);
-}
-.detail__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-}
-.detail__meta .tags {
-  margin-bottom: 0;
-}
-.specs--lg {
-  gap: 1.8rem;
-  border-top: none;
-  padding-top: 0;
-}
-.specs--lg .specs__num {
-  font-size: 1.4rem;
 }
 
 .detail__cta {
@@ -1606,9 +1599,6 @@ a.contact__detail:hover .contact__detail-value {
   }
   .showcase--flip .showcase__media {
     order: 0;
-  }
-  .detail__intro {
-    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 560px) {

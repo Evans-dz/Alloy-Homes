@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 
 const credentials = [
   "St. George, UT",
-  "15+ Years Building",
+  "20+ Years Building",
   "USU · BBA",
   "Weber State · Construction Mgmt",
 ];
@@ -25,16 +25,24 @@ export default function About() {
           <p className="eyebrow eyebrow--light">The builder behind Alloy</p>
           <h2 className="section__title section__title--light">Meet Justin Gish.</h2>
           <p className="about__body">
-            Justin grew up in Cache Valley with an early love of building. He
-            studied business at Utah State and construction management at Weber
-            State, and has spent more than fifteen years in the industry —
-            always searching for new ways to become a better builder.
+            With more than 20 years in construction, Justin Gish brings decades
+            of hands-on experience and a deep understanding of the building
+            process to every Alloy home. He studied business at Utah State and
+            construction management at Weber State, and has spent his career
+            searching for new ways to build better.
           </p>
           <p className="about__body">
-            He believes in giving you the highest-quality home alongside an
-            open, positive experience. Attention to detail and honest
-            communication about your needs matter to him, so the process feels
-            calm and stress-free — and you get to enjoy building your dream home.
+            As the owner and builder behind Alloy Homes, Justin stays personally
+            involved in every project. From early planning and budgeting through
+            construction and move-in, he works alongside clients, architects,
+            designers, engineers, and trades to keep every detail moving in the
+            right direction.
+          </p>
+          <p className="about__body">
+            That hands-on approach allows Alloy to remain selective about the
+            homes we build and give each one the attention it deserves. The goal
+            is simple: build exceptional homes, communicate clearly, and stand
+            behind our work for years to come.
           </p>
 
           <ul className="chips">

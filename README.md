@@ -17,7 +17,7 @@ app/
 components/          ← Hero, Collection, Process, About, Contact, etc.
 data/
   site.js           ← company info, contact, nav, service area  ← EDIT ME
-  homes.js          ← the home collection (names, specs, photos)  ← EDIT ME
+  homes.js          ← the home collection (names, descriptions, photos)  ← EDIT ME
   testimonials.js   ← client reviews  ← EDIT ME
 public/images/      ← drop photos + hero video here (see PUT-IMAGES-HERE.md)
 ```
@@ -79,14 +79,14 @@ follow the DNS records Vercel shows (add them at the current registrar).
 ## Editing content — the quick version
 
 - **Phone, email, service area, social links** → `data/site.js`
-- **The homes** (names, specs, which photo) → `data/homes.js`
+- **The homes** (names, description, which photo) → `data/homes.js`
 - **Testimonials** → `data/testimonials.js`
 - **Colors, spacing, type** → CSS variables at the top of `app/globals.css`
 
 ## Before going live — checklist
 
-- [ ] Confirm each home's **sq ft / beds / baths / garage** in `data/homes.js`
-      (currently estimates) and the **city** (both set to Ivins) and **names**
+- [ ] Confirm each home's **city** (both set to Ivins) and **names** in
+      `data/homes.js` — set `location: ""` to hide it
 - [ ] Add Justin's portrait at `public/images/about/justin.jpg`
 - [ ] Replace placeholder testimonials in `data/testimonials.js`
 - [ ] Set real Instagram/Facebook URLs in `data/site.js` (or remove them)
