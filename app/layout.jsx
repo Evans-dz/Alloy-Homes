@@ -30,7 +30,7 @@ const mono = JetBrains_Mono({
 export const metadata = {
   metadataBase: new URL("https://alloy-homes.com"),
   title: {
-    default: "Alloy Homes — Custom Home Builder in St. George, Utah",
+    default: "Alloy Homes — Custom Home Builder in Southern Utah",
     template: "%s · Alloy Homes",
   },
   description:

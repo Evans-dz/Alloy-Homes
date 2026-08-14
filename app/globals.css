@@ -1072,9 +1072,15 @@ a.contact__detail:hover .contact__detail-value {
 }
 .footer__inner {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  /* Three columns, not four: the service-area list wraps into two runs and
+     the socials sit with the brand, so nothing is left half-empty. */
+  grid-template-columns: 1.5fr 1fr 1.4fr;
   gap: 2.5rem;
+  align-items: start;
   padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.footer__brand .socials {
+  margin-top: 0.5rem;
 }
 .footer__brand {
   display: flex;
@@ -1120,6 +1126,18 @@ a.contact__detail:hover .contact__detail-value {
   flex-direction: column;
   gap: 0.6rem;
 }
+/* Nine towns stacked set the height of the whole footer; two runs halves it.
+   Must come after .footer__list — same specificity, so order decides. */
+.footer__list--areas {
+  display: grid;
+  /* Fill down, not across: keeps the Washington County towns in the first
+     run and the Kane/Garfield ones in the second. */
+  grid-auto-flow: column;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-columns: minmax(0, 1fr);
+  row-gap: 0.6rem;
+  column-gap: 1.5rem;
+}
 .footer__list a,
 .footer__list li {
   font-family: var(--ff-sans);
@@ -1130,6 +1148,137 @@ a.contact__detail:hover .contact__detail-value {
 .footer__list a:hover {
   color: var(--brass);
 }
+/* ---------- Social buttons ---------- */
+.socials {
+  display: flex;
+  gap: 0.6rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.social {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  color: var(--cream);
+  background: rgba(255, 255, 255, 0.02);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+    transform 0.25s ease;
+}
+.social svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.social:hover,
+.social:focus-visible {
+  background: var(--bronze);
+  border-color: var(--bronze);
+  color: var(--basalt);
+  transform: translateY(-2px);
+}
+
+/* ---------- Professional memberships (footer strip) ---------- */
+.footer__memberships {
+  border-top: 1px solid var(--hair);
+}
+.memberships {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  flex-wrap: wrap;
+  padding-block: clamp(1.4rem, 2.6vw, 1.9rem);
+}
+.memberships__label {
+  flex: none;
+  font-family: var(--ff-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+.memberships__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.8rem);
+  list-style: none;
+}
+.member__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+/* Association art is full-colour on white, so it gets its own light tile
+   rather than sitting straight on the basalt. */
+/* flex, not grid: a centred grid area is auto-sized, so the logo's
+   percentage sizing has no definite box and tall marks overflow. */
+.member__tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 104px;
+  height: 58px;
+  padding: 0.5rem;
+  /* Warm stone rather than pure white — at #fff these badges were the
+     highest-contrast thing on the page, louder than the Alloy mark itself. */
+  background: var(--stone);
+  border-radius: 3px;
+  border: 1px solid var(--hair);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+a.member__link:hover .member__tile,
+a.member__link:focus-visible .member__tile {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+/* width/height 100% + contain, rather than max-*: inside a padded grid
+   tile a percentage max-height has no definite box to resolve against,
+   so tall marks (NAHB) spill past the padding. */
+.member__logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.member__abbr {
+  font-family: var(--ff-sans);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  color: var(--on-light);
+  text-align: center;
+}
+.member__name {
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  transition: color 0.2s ease;
+}
+a.member__link:hover .member__name,
+a.member__link:focus-visible .member__name {
+  color: var(--brass);
+}
+
+@media (max-width: 620px) {
+  .memberships {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.1rem;
+  }
+  .member__tile {
+    width: 92px;
+    height: 56px;
+  }
+}
+
 .footer__bar {
   border-top: 1px solid var(--hair);
 }

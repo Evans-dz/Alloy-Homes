@@ -1,13 +1,6 @@
 import SmartImage from "./SmartImage";
 import Reveal from "./Reveal";
 
-const credentials = [
-  "St. George, UT",
-  "20+ Years Building",
-  "USU · BBA",
-  "Weber State · Construction Mgmt",
-];
-
 export default function About() {
   return (
     <section className="section section--dark section--about" id="about">
@@ -25,11 +18,11 @@ export default function About() {
           <p className="eyebrow eyebrow--light">The builder behind Alloy</p>
           <h2 className="section__title section__title--light">Meet Justin Gish.</h2>
           <p className="about__body">
-            With more than 20 years in construction, Justin Gish brings decades
-            of hands-on experience and a deep understanding of the building
-            process to every Alloy home. He studied business at Utah State and
-            construction management at Weber State, and has spent his career
-            searching for new ways to build better.
+            With more than 20 years in construction, Justin has been involved in
+            just about every part of the building process along the way. Much of
+            what he brings to Alloy today comes from years of hands-on
+            experience building homes, solving problems, and working through the
+            details that come with each project.
           </p>
           <p className="about__body">
             As the owner and builder behind Alloy Homes, Justin stays personally
@@ -44,14 +37,6 @@ export default function About() {
             is simple: build exceptional homes, communicate clearly, and stand
             behind our work for years to come.
           </p>
-
-          <ul className="chips">
-            {credentials.map((c) => (
-              <li key={c} className="chip">
-                {c}
-              </li>
-            ))}
-          </ul>
 
           <a href="#contact" className="btn btn--primary">
             Work with Justin

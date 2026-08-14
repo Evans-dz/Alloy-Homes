@@ -15,8 +15,8 @@ export const site = {
   phone: "(435) 770-1232",
   phoneHref: "tel:4357701232",
   // Set this to the address you want inquiry emails delivered to.
-  email: "justin@alloy-homes.com",
-  city: "St. George, Utah",
+  email: "info@alloy.homes",
+  city: "Southern Utah",
 
   // Towns you build in (shown in the footer + contact section).
   // Grouped loosely by area: Washington County first, then Kane/Garfield.
@@ -38,10 +38,35 @@ export const site = {
     href: "https://ez-hd.co",
   },
 
-  // ---- Social links (replace # with real profiles, or delete) ----
+  // ---- Social links ----
   social: [
-    { label: "Instagram", href: "#" },
-    { label: "Facebook", href: "#" },
+    { label: "Instagram", href: "https://www.instagram.com/alloy.homes" },
+    { label: "Facebook", href: "https://www.facebook.com/Alloy.Homes.Utah" },
+  ],
+
+  // ---- Professional memberships (footer strip) ----
+  // Ordered local -> state -> national. Drop the logo files into
+  // public/images/memberships/; if one is missing the short name renders
+  // in its place, so the row never shows a broken image.
+  memberships: [
+    {
+      name: "Southern Utah Home Builders Association",
+      short: "SUHBA",
+      logo: "/images/memberships/suhba.png",
+      href: "https://suhba.com/",
+    },
+    {
+      name: "Utah Home Builders Association",
+      short: "Utah HBA",
+      logo: "/images/memberships/hbautah.png",
+      href: "https://www.hbautah.com/",
+    },
+    {
+      name: "National Association of Home Builders",
+      short: "NAHB",
+      logo: "/images/memberships/nahb.png",
+      href: "https://www.nahb.org/",
+    },
   ],
 
   // ---- Primary navigation ----

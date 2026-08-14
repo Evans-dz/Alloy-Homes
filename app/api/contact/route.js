@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 // Where inquiry emails are delivered. Override with CONTACT_TO env var.
-const TO = process.env.CONTACT_TO || "justin@alloy-homes.com";
+const TO = process.env.CONTACT_TO || "info@alloy.homes";
 // Must be a domain you've verified in Resend (or use onboarding@resend.dev to test).
 const FROM = process.env.CONTACT_FROM || "Alloy Homes <onboarding@resend.dev>";
 
