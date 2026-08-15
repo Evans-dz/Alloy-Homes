@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { site } from "../data/site";
 
 const initial = {
   name: "",
@@ -14,13 +15,14 @@ const initial = {
 
 export default function ContactForm() {
   const [form, setForm] = useState(initial);
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  // idle | sending | sent | invalid | undelivered
+  const [status, setStatus] = useState("idle");
 
   const update = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const submit = async () => {
     if (!form.name || !form.email) {
-      setStatus("error");
+      setStatus("invalid");
       return;
     }
     setStatus("sending");
@@ -30,11 +32,19 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error("bad response");
-      setStatus("sent");
-      setForm(initial);
+      const data = await res.json().catch(() => ({}));
+
+      // Only claim success when the server actually delivered it. Anything
+      // else hands the visitor Justin's phone and email rather than letting
+      // their inquiry disappear behind a thank-you message.
+      if (res.ok && data.ok && data.delivered) {
+        setStatus("sent");
+        setForm(initial);
+        return;
+      }
+      setStatus(res.status === 400 ? "invalid" : "undelivered");
     } catch (err) {
-      setStatus("error");
+      setStatus("undelivered");
     }
   };
 
@@ -47,7 +57,7 @@ export default function ContactForm() {
         <h3 className="form__done-title">Thanks — we've got it.</h3>
         <p className="form__done-body">
           Justin will be in touch soon. If you'd rather talk now, call{" "}
-          <a href="tel:4357701232">(435) 770-1232</a>.
+          <a href={site.phoneHref}>{site.phone}</a>.
         </p>
       </div>
     );
@@ -137,10 +147,19 @@ export default function ContactForm() {
         />
       </label>
 
-      {status === "error" ? (
+      {status === "invalid" ? (
         <p className="form__error" role="alert">
           Please add at least your name and email, then try again — or call{" "}
-          <a href="tel:4357701232">(435) 770-1232</a>.
+          <a href={site.phoneHref}>{site.phone}</a>.
+        </p>
+      ) : null}
+
+      {status === "undelivered" ? (
+        <p className="form__error" role="alert">
+          Sorry — we couldn't send that just now. Please email{" "}
+          <a href={`mailto:${site.email}`}>{site.email}</a> or call{" "}
+          <a href={site.phoneHref}>{site.phone}</a> and we'll pick it up right
+          away.
         </p>
       ) : null}
 

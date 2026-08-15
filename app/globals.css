@@ -858,6 +858,11 @@ textarea {
   border-radius: 3px;
   border: 1px solid var(--hair);
 }
+/* Breathing room between the heading and the bio — they were butted up
+   against each other. */
+.about__text .section__title {
+  margin-bottom: 1.6rem;
+}
 .about__body {
   font-family: var(--ff-sans);
   color: var(--cream-dim);
@@ -889,6 +894,9 @@ textarea {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: clamp(1.6rem, 3vw, 2.4rem);
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  /* Cards size to their own content — otherwise expanding one quote
+     stretches its neighbours to match and leaves them mostly empty. */
+  align-items: start;
 }
 .testimonial {
   margin: 0;
@@ -900,12 +908,63 @@ textarea {
   flex-direction: column;
   gap: 1.2rem;
 }
+.testimonial {
+  align-content: start;
+}
 .testimonial__quote {
   font-family: var(--ff-display);
   font-style: italic;
   font-size: 1.2rem;
   line-height: 1.45;
   color: var(--cream);
+}
+.testimonial__quote p + p {
+  margin-top: 0.9rem;
+}
+/* max-height rather than -webkit-line-clamp: these quotes are several
+   <p> blocks, and line-clamp only reliably clamps inline content. */
+.testimonial__quote--clamped {
+  max-height: 11.6em;
+  overflow: hidden;
+  position: relative;
+}
+.testimonial__quote--clamped::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 4.5em;
+  background: linear-gradient(to bottom, rgba(34, 28, 21, 0), var(--ink) 85%);
+  pointer-events: none;
+}
+.testimonial__more {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: -0.4rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--ff-sans);
+  font-weight: 600;
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
+  /* Dimmed at rest so it reads as a quiet affordance, then lifts on hover
+     or keyboard focus. Never hidden outright — it is the only way to reach
+     the rest of the quote on a touch screen. */
+  color: var(--cream-dim);
+  transition: color 0.25s ease, gap 0.25s ease;
+}
+.testimonial:hover .testimonial__more,
+.testimonial__more:hover,
+.testimonial__more:focus-visible {
+  color: var(--brass);
+  gap: 0.7rem;
+}
+.testimonial__more-arrow {
+  font-size: 0.9em;
+  line-height: 1;
 }
 .testimonial__by {
   display: flex;

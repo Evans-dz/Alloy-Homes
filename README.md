@@ -88,11 +88,34 @@ follow the DNS records Vercel shows (add them at the current registrar).
 - [ ] Confirm each home's **city** (both set to Ivins) and **names** in
       `data/homes.js` — set `location: ""` to hide it
 - [ ] Add Justin's portrait at `public/images/about/justin.jpg`
-- [ ] Replace placeholder testimonials in `data/testimonials.js`
-- [ ] Set real Instagram/Facebook URLs in `data/site.js` (or remove them)
-- [ ] Confirm the inquiry email address (`CONTACT_TO`) + add `RESEND_API_KEY`
+- [ ] Add the name for the first testimonial in `data/testimonials.js`
+- [ ] Turn on inquiry email — see below
 - [ ] (Optional) delete `hero-alt-1.mp4` / `hero-alt-2.mp4`, or swap one in
 - [ ] (Optional) add a `favicon.ico` / `app/icon.png`
+
+## Contact form email
+
+The form posts to `app/api/contact/route.js`, which sends through Resend.
+Until it is configured the form does **not** pretend to succeed — it tells
+the visitor to email or call instead, so no inquiry is lost silently.
+
+Two environment variables in Vercel turn it on:
+
+| Variable | Value |
+| --- | --- |
+| `RESEND_API_KEY` | from resend.com → API Keys |
+| `CONTACT_FROM` | e.g. `Alloy Homes <inquiries@send.alloy.homes>` |
+
+`CONTACT_TO` defaults to `info@alloy.homes`; set it only to change recipient.
+
+**Verify a subdomain, not the root.** DNS for alloy.homes lives at GoDaddy
+and the root already carries a Microsoft 365 SPF record ending in `-all`.
+A second `v=spf1` record on the root is invalid and would put existing M365
+mail at risk. Adding Resend as `send.alloy.homes` leaves the root untouched.
+
+The sandbox sender (`onboarding@resend.dev`) only delivers to your own
+Resend account address, so a verified domain is required to reach
+`info@alloy.homes`.
 
 ---
 

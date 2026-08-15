@@ -24,9 +24,10 @@ export async function POST(request) {
 
   const { name, email, phone, location, timeline, message, company } = data || {};
 
-  // Honeypot — bots fill this in.
+  // Honeypot — bots fill this in. Mirror the success shape exactly so a
+  // bot can't tell it was caught.
   if (company) {
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, delivered: true });
   }
 
   if (!name || !email) {
@@ -48,17 +49,18 @@ export async function POST(request) {
 
   const key = process.env.RESEND_API_KEY;
 
-  // No email service configured yet — accept the submission so the form
-  // works in preview. Add RESEND_API_KEY in Vercel to start delivering.
+  // Report the misconfiguration instead of returning ok. Answering "200,
+  // thanks!" while dropping the inquiry loses real customers silently —
+  // they believe they've reached Justin and he never hears about them.
   if (!key) {
-    console.log("[contact] (no RESEND_API_KEY) inquiry received:", {
-      name,
-      email,
-      phone,
-      location,
-      timeline,
-    });
-    return NextResponse.json({ ok: true, delivered: false });
+    console.error(
+      "[contact] RESEND_API_KEY is not set — inquiry was NOT delivered:",
+      { name, email, phone, location, timeline }
+    );
+    return NextResponse.json(
+      { ok: false, delivered: false, error: "not_configured" },
+      { status: 503 }
+    );
   }
 
   try {
@@ -79,13 +81,19 @@ export async function POST(request) {
 
     if (!res.ok) {
       const detail = await res.text();
-      console.error("[contact] Resend error:", detail);
-      return NextResponse.json({ ok: false, error: "Could not send." }, { status: 502 });
+      console.error("[contact] Resend rejected the send:", res.status, detail);
+      return NextResponse.json(
+        { ok: false, delivered: false, error: "send_failed" },
+        { status: 502 }
+      );
     }
 
     return NextResponse.json({ ok: true, delivered: true });
   } catch (err) {
     console.error("[contact] send failed:", err);
-    return NextResponse.json({ ok: false, error: "Could not send." }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, delivered: false, error: "send_failed" },
+      { status: 500 }
+    );
   }
 }
