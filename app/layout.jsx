@@ -28,7 +28,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://alloy-homes.com"),
+  metadataBase: new URL("https://www.alloy.homes"),
   title: {
     default: "Alloy Homes — Custom Home Builder in Southern Utah",
     template: "%s · Alloy Homes",
@@ -46,10 +46,18 @@ export const metadata = {
     title: "Alloy Homes — Custom Home Builder in Southern Utah",
     description:
       "Custom design-build homes in Southern Utah — design, planning, and craftsmanship under one accountable team.",
-    url: "https://alloy-homes.com",
+    url: "https://www.alloy.homes",
     siteName: site.name,
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "/images/hero/hero.jpg",
+        width: 2560,
+        height: 1438,
+        alt: "A custom home by Alloy Homes in Southern Utah",
+      },
+    ],
   },
   robots: { index: true, follow: true },
 };

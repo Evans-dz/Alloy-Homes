@@ -87,7 +87,7 @@ follow the DNS records Vercel shows (add them at the current registrar).
 
 - [ ] Confirm each home's **city** (both set to Ivins) and **names** in
       `data/homes.js` — set `location: ""` to hide it
-- [ ] Add Justin's portrait at `public/images/about/justin.jpg`
+- [x] Add Justin's portrait at `public/images/about/justin.jpg`
 - [ ] Add the name for the first testimonial in `data/testimonials.js`
 - [ ] Turn on inquiry email — see below
 - [ ] (Optional) delete `hero-alt-1.mp4` / `hero-alt-2.mp4`, or swap one in
