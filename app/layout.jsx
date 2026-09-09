@@ -1,4 +1,5 @@
 import { Cormorant_Garamond, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "../components/Header";
@@ -77,6 +78,18 @@ export default function RootLayout({ children }) {
         <main>{children}</main>
         <Footer />
         <Analytics />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-Q2WP44G9HG"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-Q2WP44G9HG');
+          `}
+        </Script>
       </body>
     </html>
   );
