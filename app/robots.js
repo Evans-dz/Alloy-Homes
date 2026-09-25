@@ -1,9 +1,11 @@
+import { site } from "../data/site";
+
 export default function robots() {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://www.alloy.homes/sitemap.xml",
+    sitemap: `${site.url}/sitemap.xml`,
   };
 }

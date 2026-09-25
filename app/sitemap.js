@@ -1,6 +1,7 @@
 import { homes } from "../data/homes";
+import { site } from "../data/site";
 
-const BASE = "https://www.alloy.homes";
+const BASE = site.url;
 
 export default function sitemap() {
   return [
@@ -15,6 +16,12 @@ export default function sitemap() {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
+    })),
+    ...site.legal.map((page) => ({
+      url: `${BASE}${page.href}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.2,
     })),
   ];
 }

@@ -63,8 +63,16 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Anchor targets land just below the fixed header instead of under it.
+   Tied to --header-h, so it tracks the bar at every width. */
+section[id],
+h1[id],
+h2[id],
+h3[id] {
+  scroll-margin-top: var(--header-h);
 }
 
 body {
@@ -325,6 +333,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
+  min-height: 44px;
   text-decoration: none;
   color: var(--cream);
 }
@@ -421,6 +430,10 @@ textarea {
   color: var(--cream);
   text-decoration: none;
   font-size: 0.9rem;
+  /* Padding widens the hit area; the matching negative margin keeps the
+     bar's layout exactly where it was. */
+  padding-block: 0.75rem;
+  margin-block: -0.75rem;
   opacity: 0.82;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
@@ -439,19 +452,44 @@ textarea {
   font-size: 0.8rem;
   color: var(--cream);
   text-decoration: none;
+  padding-block: 0.75rem;
+  margin-block: -0.75rem;
   letter-spacing: 0.02em;
   transition: color 0.2s ease;
 }
 .header__phone:hover {
   color: var(--brass);
 }
+.header__call {
+  display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  border: 1px solid var(--hair-strong);
+  border-radius: 3px;
+  color: var(--brass);
+  background: rgba(22, 19, 15, 0.25);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.header__call svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.header__call:hover,
+.header__call:focus-visible {
+  background: var(--bronze);
+  border-color: var(--bronze);
+  color: var(--basalt);
+}
 .header__burger {
   display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   margin-left: auto;
 }
 .header__burger span {
@@ -486,12 +524,18 @@ textarea {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-8px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  /* visibility takes the closed menu's links out of the tab order. It flips
+     after the fade on close and immediately on open, so the motion is
+     unchanged. */
+  visibility: hidden;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
 }
 .mobile-menu--open {
   opacity: 1;
   pointer-events: auto;
   transform: none;
+  visibility: visible;
+  transition-delay: 0s;
 }
 .mobile-menu__nav {
   display: flex;
@@ -517,6 +561,9 @@ textarea {
   padding-top: 2rem;
 }
 .mobile-menu__phone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-family: var(--ff-mono);
   color: var(--brass);
   font-size: 1rem;
@@ -941,8 +988,11 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  margin-top: -0.4rem;
-  padding: 0;
+  /* 0.7rem of padding makes a 44px target; the margins give it back so the
+     card's spacing is unchanged. */
+  margin-top: -1.1rem;
+  margin-bottom: -0.7rem;
+  padding: 0.7rem 0;
   background: none;
   border: 0;
   cursor: pointer;
@@ -1167,6 +1217,12 @@ a.contact__detail:hover .contact__detail-value {
   font-size: 0.9rem;
   transition: color 0.2s ease;
 }
+/* Grow the hit area into the column gap without moving anything. */
+.footer__phone,
+.footer__email {
+  padding-block: 0.35rem;
+  margin-block: -0.35rem;
+}
 .footer__phone:hover,
 .footer__email:hover {
   color: var(--brass);
@@ -1217,8 +1273,8 @@ a.contact__detail:hover .contact__detail-value {
 .social {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--hair);
   border-radius: 3px;
   color: var(--cream);
@@ -1355,6 +1411,26 @@ a.member__link:focus-visible .member__name {
   color: var(--cream-dim);
   letter-spacing: 0.04em;
 }
+.footer__bar-start {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+}
+.footer__legal {
+  display: flex;
+  gap: 1.4rem;
+}
+.footer__legal a {
+  color: inherit;
+  text-decoration: none;
+  padding-block: 0.6rem;
+  margin-block: -0.6rem;
+  transition: color 0.2s ease;
+}
+.footer__legal a:hover {
+  color: var(--brass);
+}
 .footer__credit a {
   color: var(--brass);
   text-decoration: none;
@@ -1409,6 +1485,10 @@ a.member__link:focus-visible .member__name {
   }
   .header__burger {
     display: flex;
+    margin-left: -0.6rem;
+  }
+  .header__call {
+    display: grid;
   }
 }
 @media (min-width: 1025px) {
@@ -1445,6 +1525,11 @@ a.member__link:focus-visible .member__name {
   }
   .footer__inner {
     grid-template-columns: 1fr 1fr;
+  }
+  /* The service area drops to its own row here; give its two runs the full
+     width so names like "St. George" don't break across lines. */
+  .footer__col:last-child {
+    grid-column: 1 / -1;
   }
   .process__step {
     grid-template-columns: 1fr;
@@ -1641,7 +1726,8 @@ a.member__link:focus-visible .member__name {
   letter-spacing: 0.08em;
   color: var(--cream);
   text-decoration: none;
-  margin-bottom: 1.5rem;
+  padding-block: 0.85rem;
+  margin: -0.85rem 0 0.65rem;
   opacity: 0.85;
 }
 .detail__back:hover {
@@ -1819,4 +1905,177 @@ a.member__link:focus-visible .member__name {
     height: 44px;
     font-size: 2rem;
   }
+}
+
+/* ============================================================
+   TOUCH TARGETS, PAGE HERO, LEGAL PAGES + 404
+   ============================================================ */
+
+/* ---------- Touch targets on phones ----------
+   44px for anything a thumb has to hit. Scoped to coarse pointers so the
+   desktop layout stays exactly as designed. */
+@media (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+  }
+  /* min-width covers short words like "About" and "Terms"; the extra
+     width sits after the text, so nothing visibly moves. */
+  .footer__phone,
+  .footer__email,
+  .footer__legal a,
+  .footer__list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding-block: 0;
+    margin-block: 0;
+  }
+  .footer__brand {
+    gap: 0.4rem;
+  }
+  .footer__list:not(.footer__list--areas) {
+    gap: 0;
+  }
+}
+
+/* ---------- Page hero (legal pages + 404) ----------
+   A basalt band so the transparent header has the same dark surface to
+   sit on that the photo heroes give it. */
+.page-hero {
+  background: var(--basalt);
+  color: var(--cream);
+  padding-top: calc(var(--header-h) + clamp(2.5rem, 7vw, 5rem));
+  padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+.page-hero__title {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  margin-top: 0.9rem;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+.page-hero__meta {
+  font-family: var(--ff-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--cream-dim);
+  margin-top: 1.4rem;
+}
+.page-hero__lead {
+  font-family: var(--ff-sans);
+  max-width: 46ch;
+  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--cream-dim);
+  margin-top: 1.4rem;
+}
+
+/* ---------- Legal text ---------- */
+.legal__section {
+  background: var(--stone);
+  padding-top: clamp(3rem, 6vw, 4.5rem);
+}
+.legal__body {
+  max-width: 68ch;
+}
+/* Chained with .legal__body so it outranks the ".legal__body p" rule. */
+.legal__body .legal__intro {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  line-height: 1.45;
+  color: var(--on-light);
+}
+.legal__body h2 {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.6vw, 1.95rem);
+  line-height: 1.15;
+  color: var(--on-light);
+  margin: 2.4rem 0 0.8rem;
+  padding-top: 2.2rem;
+  border-top: 1px solid var(--hair-light);
+}
+.legal__body p,
+.legal__body li {
+  font-family: var(--ff-sans);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--on-light-dim);
+}
+.legal__body p + p {
+  margin-top: 0.9rem;
+}
+.legal__body ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-left: 1.25rem;
+  margin-block: 0.9rem;
+}
+.legal__body li::marker {
+  color: var(--bronze-ink);
+}
+.legal__body strong {
+  font-weight: 600;
+  color: var(--on-light);
+}
+.legal__body a {
+  color: var(--bronze-ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+.legal__body a:hover {
+  color: var(--on-light);
+}
+.legal__body code {
+  font-family: var(--ff-mono);
+  font-size: 0.9em;
+  color: var(--on-light);
+}
+
+/* ---------- 404 ---------- */
+.notfound {
+  min-height: 88svh;
+  display: flex;
+  align-items: center;
+  padding-bottom: clamp(4rem, 9vw, 7rem);
+}
+.notfound__nav {
+  max-width: 720px;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--hair);
+}
+.notfound__label {
+  font-family: var(--ff-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 0.3rem;
+}
+.notfound__links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+}
+.notfound__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--ff-sans);
+  font-size: 0.98rem;
+  color: var(--cream);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.notfound__links a:hover {
+  color: var(--brass);
 }

@@ -4,6 +4,7 @@ import { site } from "../../../data/site";
 import SmartImage from "../../../components/SmartImage";
 import Gallery from "../../../components/Gallery";
 import Reveal from "../../../components/Reveal";
+import JsonLd, { breadcrumbSchema } from "../../../components/JsonLd";
 
 export function generateStaticParams() {
   return homes.map((h) => ({ slug: h.slug }));
@@ -15,9 +16,11 @@ export function generateMetadata({ params }) {
   return {
     title: home.name,
     description: home.blurb,
+    alternates: { canonical: `/homes/${home.slug}` },
     openGraph: {
       title: `${home.name} · Alloy Homes`,
       description: home.blurb,
+      url: `/homes/${home.slug}`,
       images: [home.cover],
     },
   };
@@ -29,6 +32,7 @@ export default function HomeDetail({ params }) {
 
   return (
     <article className="detail">
+      <JsonLd data={breadcrumbSchema([{ name: home.name, path: `/homes/${home.slug}` }])} />
       <div className="detail__hero">
         <SmartImage src={home.cover} alt={home.name} label={home.name} className="detail__hero-img" />
         <div className="detail__hero-scrim" />

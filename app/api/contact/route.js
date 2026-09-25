@@ -38,13 +38,13 @@ export async function POST(request) {
   }
 
   const html = `
-    <h2>New inquiry — Alloy Homes</h2>
+    <h2>New inquiry from alloy.homes</h2>
     <p><strong>Name:</strong> ${escape(name)}</p>
     <p><strong>Email:</strong> ${escape(email)}</p>
-    <p><strong>Phone:</strong> ${escape(phone) || "—"}</p>
-    <p><strong>Build location:</strong> ${escape(location) || "—"}</p>
-    <p><strong>Timeline:</strong> ${escape(timeline) || "—"}</p>
-    <p><strong>Message:</strong><br/>${escape(message).replace(/\n/g, "<br/>") || "—"}</p>
+    <p><strong>Phone:</strong> ${escape(phone) || "Not given"}</p>
+    <p><strong>Build location:</strong> ${escape(location) || "Not given"}</p>
+    <p><strong>Timeline:</strong> ${escape(timeline) || "Not given"}</p>
+    <p><strong>Message:</strong><br/>${escape(message).replace(/\n/g, "<br/>") || "Not given"}</p>
   `;
 
   const key = process.env.RESEND_API_KEY;
@@ -54,7 +54,7 @@ export async function POST(request) {
   // they believe they've reached Justin and he never hears about them.
   if (!key) {
     console.error(
-      "[contact] RESEND_API_KEY is not set — inquiry was NOT delivered:",
+      "[contact] RESEND_API_KEY is not set, so this inquiry was NOT delivered:",
       { name, email, phone, location, timeline }
     );
     return NextResponse.json(
@@ -74,7 +74,7 @@ export async function POST(request) {
         from: FROM,
         to: [TO],
         reply_to: email,
-        subject: `New inquiry — ${name}`,
+        subject: `New inquiry from ${name}`,
         html,
       }),
     });

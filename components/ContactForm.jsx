@@ -54,7 +54,7 @@ export default function ContactForm() {
         <span className="form__mark" aria-hidden="true">
           A
         </span>
-        <h3 className="form__done-title">Thanks — we've got it.</h3>
+        <h3 className="form__done-title">Thanks, we've got it.</h3>
         <p className="form__done-body">
           Justin will be in touch soon. If you'd rather talk now, call{" "}
           <a href={site.phoneHref}>{site.phone}</a>.
@@ -120,6 +120,7 @@ export default function ContactForm() {
             value={form.location}
             onChange={update}
             placeholder="e.g. Ivins, UT"
+            autoComplete="off"
           />
         </label>
       </div>
@@ -143,20 +144,20 @@ export default function ContactForm() {
           value={form.message}
           onChange={update}
           rows={5}
-          placeholder="Tell us about the home you'd like to build — lot, style, size, must-haves."
+          placeholder="Tell us about the home you'd like to build: lot, style, size, must-haves."
         />
       </label>
 
       {status === "invalid" ? (
         <p className="form__error" role="alert">
-          Please add at least your name and email, then try again — or call{" "}
+          Please add at least your name and email and try again, or call{" "}
           <a href={site.phoneHref}>{site.phone}</a>.
         </p>
       ) : null}
 
       {status === "undelivered" ? (
         <p className="form__error" role="alert">
-          Sorry — we couldn't send that just now. Please email{" "}
+          Sorry, we couldn't send that just now. Please email{" "}
           <a href={`mailto:${site.email}`}>{site.email}</a> or call{" "}
           <a href={site.phoneHref}>{site.phone}</a> and we'll pick it up right
           away.

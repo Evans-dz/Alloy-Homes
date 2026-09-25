@@ -6,17 +6,30 @@
 export const site = {
   name: "Alloy Homes",
   legalName: "Alloy Homes LLC",
+  // Canonical origin. Every absolute URL (canonical tags, sitemap, schema,
+  // llms.txt) is built from this.
+  url: "https://www.alloy.homes",
+  // Default social share image (og:image) for every page that doesn't set
+  // its own.
+  shareImage: {
+    url: "/images/hero/hero.jpg",
+    width: 2560,
+    height: 1438,
+    alt: "A custom home by Alloy Homes in Southern Utah",
+  },
   tagline: "Built around you. Built to endure.",
   // One-line positioning used in the hero + meta description.
   positioning:
-    "Custom design-build homes in Southern Utah — design, planning, and craftsmanship under one accountable team.",
+    "Custom design-build homes in Southern Utah, with design, planning, and craftsmanship under one accountable team.",
 
   // ---- Contact ----
   phone: "(435) 770-1232",
   phoneHref: "tel:4357701232",
+  phoneIntl: "+1-435-770-1232",
   // Set this to the address you want inquiry emails delivered to.
   email: "info@alloy.homes",
   city: "Southern Utah",
+  region: "UT",
 
   // Towns you build in (shown in the footer + contact section).
   // Grouped loosely by area: Washington County first, then Kane/Garfield.
@@ -70,11 +83,19 @@ export const site = {
   ],
 
   // ---- Primary navigation ----
+  // Root-relative so the links still land on the homepage sections from a
+  // home detail page, the legal pages and the 404.
   nav: [
-    { label: "Homes", href: "#homes" },
-    { label: "Process", href: "#process" },
-    { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    { label: "Homes", href: "/#homes" },
+    { label: "Process", href: "/#process" },
+    { label: "About", href: "/#about" },
+    { label: "Contact", href: "/#contact" },
+  ],
+
+  // ---- Legal pages (footer bar + sitemap) ----
+  legal: [
+    { label: "Privacy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
   ],
 };
 
@@ -86,7 +107,7 @@ export const pillars = [
   },
   {
     title: "Innovation",
-    body: "We pursue the best available in the building industry — materials, methods, and finishes — and pair them with proven craftsmanship. Your home is built with what's next, not what's easy.",
+    body: "We pursue the best materials, methods, and finishes available in the building industry and pair them with proven craftsmanship. Your home is built with what's next, not what's easy.",
   },
   {
     title: "Commitment",

@@ -26,7 +26,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
-          <a href="#top" className="wordmark wordmark--footer" aria-label="Alloy Homes — home">
+          <a href="/#top" className="wordmark wordmark--footer" aria-label="Alloy Homes home page">
             <AlloyLogo className="wordmark__logo" />
           </a>
           <p className="footer__tagline">{site.tagline}</p>
@@ -55,7 +55,7 @@ export default function Footer() {
           </ul>
         </div>
         <div className="footer__col">
-          <h4 className="footer__heading">Explore</h4>
+          <h2 className="footer__heading">Explore</h2>
           <ul className="footer__list">
             {site.nav.map((item) => (
               <li key={item.href}>
@@ -65,7 +65,7 @@ export default function Footer() {
           </ul>
         </div>
         <div className="footer__col">
-          <h4 className="footer__heading">Service area</h4>
+          <h2 className="footer__heading">Service area</h2>
           <ul className="footer__list footer__list--areas">
             {site.serviceArea.map((place) => (
               <li key={place}>{place}</li>
@@ -88,9 +88,18 @@ export default function Footer() {
 
       <div className="footer__bar">
         <div className="container footer__bar-inner">
-          <span>
-            © {year} {site.legalName}
-          </span>
+          <div className="footer__bar-start">
+            <span>
+              © {year} {site.legalName}
+            </span>
+            <nav className="footer__legal" aria-label="Legal">
+              {site.legal.map((item) => (
+                <a key={item.href} href={item.href}>
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </div>
           <span className="footer__built">Custom homes · {site.city}</span>
           <span className="footer__credit">
             Designed &amp; built by{" "}

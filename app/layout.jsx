@@ -29,13 +29,13 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://www.alloy.homes"),
+  metadataBase: new URL(site.url),
   title: {
-    default: "Alloy Homes — Custom Home Builder in Southern Utah",
+    default: "Alloy Homes · Custom Home Builder in Southern Utah",
     template: "%s · Alloy Homes",
   },
   description:
-    "Alloy Homes is a custom design-build home builder in St. George and Southern Utah. Design, planning, and craftsmanship under one accountable team — homes built around you and built to endure.",
+    "Alloy Homes is a custom design-build home builder in St. George and Southern Utah. Design, planning, and craftsmanship come together under one accountable team, so every home is built around you and built to endure.",
   keywords: [
     "custom home builder St. George",
     "Southern Utah home builder",
@@ -44,21 +44,14 @@ export const metadata = {
     "Alloy Homes",
   ],
   openGraph: {
-    title: "Alloy Homes — Custom Home Builder in Southern Utah",
+    title: "Alloy Homes · Custom Home Builder in Southern Utah",
     description:
-      "Custom design-build homes in Southern Utah — design, planning, and craftsmanship under one accountable team.",
-    url: "https://www.alloy.homes",
+      "Custom design-build homes in Southern Utah. Design, planning, and craftsmanship under one accountable team.",
+    url: site.url,
     siteName: site.name,
     type: "website",
     locale: "en_US",
-    images: [
-      {
-        url: "/images/hero/hero.jpg",
-        width: 2560,
-        height: 1438,
-        alt: "A custom home by Alloy Homes in Southern Utah",
-      },
-    ],
+    images: [site.shareImage],
   },
   robots: { index: true, follow: true },
 };
@@ -71,11 +64,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <body>
-        <a href="#intro" className="skip-link">
+        <a href="#main" className="skip-link">
           Skip to content
         </a>
         <Header />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <Footer />
         <Analytics />
         <Script

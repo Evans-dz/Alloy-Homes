@@ -13,7 +13,7 @@ export default function Intro() {
             <em>stronger</em> and last <em>longer.</em>
           </h2>
           <p className="intro__body">
-            That's an alloy — and it's how we build. Alloy Homes brings design,
+            That's an alloy, and it's how we build. Alloy Homes brings design,
             planning, craftsmanship, and every detail of the building process
             together under one accountable team. The result is a truly custom
             home, thoughtfully built around you and engineered to endure for

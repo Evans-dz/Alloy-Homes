@@ -48,7 +48,7 @@ export default function Gallery({ images = [], name = "" }) {
             onClick={() => show(i)}
             aria-label={`Open photo ${i + 1} of ${name}`}
           >
-            <SmartImage src={src} alt={`${name} — photo ${i + 1}`} label={name} className="gallery__img" />
+            <SmartImage src={src} alt={`${name}, photo ${i + 1} of ${images.length}`} label={name} className="gallery__img" />
           </button>
         ))}
       </div>
@@ -69,7 +69,7 @@ export default function Gallery({ images = [], name = "" }) {
             &lsaquo;
           </button>
           <figure className="lightbox__figure" onClick={(e) => e.stopPropagation()}>
-            <img src={images[index]} alt={`${name} — photo ${index + 1}`} className="lightbox__img" />
+            <img src={images[index]} alt={`${name}, photo ${index + 1} of ${images.length}`} className="lightbox__img" />
             <figcaption className="lightbox__caption">
               {name} · {index + 1} / {images.length}
             </figcaption>

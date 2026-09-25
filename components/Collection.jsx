@@ -15,7 +15,7 @@ function Showcase({ home, index }) {
       </a>
       <div className="showcase__body">
         <p className="showcase__index">
-          {String(index + 1).padStart(2, "0")} — {home.location}
+          {String(index + 1).padStart(2, "0")} · {home.location}
         </p>
         <h3 className="showcase__name">{home.name}</h3>
         <p className="showcase__blurb">{home.blurb}</p>

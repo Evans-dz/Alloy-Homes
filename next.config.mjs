@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 
-// The previous WordPress site lived on alloy-homes.com. None of its pages have
-// a counterpart here — this is one page with anchors — so pointing that domain
-// at Vercel and letting it redirect on its own would land every old URL on a
-// 404, since Vercel preserves the path. Map the old routes by hand and sweep
-// anything unlisted to the homepage.
+// The previous WordPress site lived on alloy-homes.com. Apart from the privacy
+// policy, none of its pages have a counterpart here (this is one page with
+// anchors), so pointing that domain at Vercel and letting it redirect on its
+// own would land every old URL on a 404, since Vercel preserves the path. Map
+// the old routes by hand and sweep anything unlisted to the homepage.
 //
 // These only fire once alloy-homes.com is added to the Vercel project as a
 // served domain (not a "Redirect to" domain) and its GoDaddy A/CNAME records
@@ -23,7 +23,7 @@ const OLD_ROUTES = {
   "/contact": "/#contact",
   "/blog": "/",
   "/blog-post-title": "/",
-  "/privacy-policy": "/",
+  "/privacy-policy": "/privacy",
 };
 
 const nextConfig = {
